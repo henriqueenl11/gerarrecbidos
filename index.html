@@ -18,7 +18,7 @@
 
     <script>
         // Inicializando EmailJS
-        emailjs.init("YOUR_USER_ID");
+        emailjs.init("qI4LCXqDkmxT1FBEs");
 
         function gerarRecibo() {
             const { jsPDF } = window.jspdf;
@@ -43,7 +43,7 @@
                 attachment: doc.output('datauristring')
             };
 
-            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+            emailjs.send('service_km1w0fm', 'template_da6wae6', templateParams)
                 .then(response => {
                     console.log('Email enviado', response);
                     alert("Recibo enviado para o seu e-mail!");
