@@ -1,44 +1,68 @@
-document.getElementById('recibo-form').addEventListener('submit', function (e) {
-    e.preventDefault();
-  
-    const valor = document.getElementById('valor').value;
-    const valorExtenso = document.getElementById('valorExtenso').value;
-    const referente = document.getElementById('referente').value || "N/A";
-    const nomePagador = document.getElementById('nomePagador').value;
-    const cpfPagador = document.getElementById('cpfPagador').value;
-    const cheque = document.getElementById('cheque').value || "N/A";
-    const banco = document.getElementById('banco').value || "N/A";
-    const agencia = document.getElementById('agencia').value || "N/A";
-    const local = document.getElementById('local').value;
-    const nomeEmitente = document.getElementById('nomeEmitente').value;
-    const cpfEmitente = document.getElementById('cpfEmitente').value;
-    const rgEmitente = document.getElementById('rgEmitente').value;
-  
-    const { jsPDF } = window.jspdf;
-    const pdf = new jsPDF();
-  
-    pdf.setFontSize(16);
-    pdf.text("R E C I B O", 105, 20, { align: "center" });
-  
-    pdf.setFontSize(12);
-    pdf.text(`Recibo R$ ${valor}`, 20, 40);
-    pdf.text(`Recebi(emos) de ${nomePagador} - CPF/CNPJ n° ${cpfPagador},`, 20, 50);
-    pdf.text(`a importância supra de: ${valorExtenso} - referente a: ${referente}.`, 20, 60);
-  
-    if (cheque !== "N/A") {
-      pdf.text(`Pagamento efetuado através do cheque n°: ${cheque}`, 20, 80);
-      pdf.text(`do Banco: ${banco} Agência: ${agencia}.`, 20, 90);
-    }
-  
-    pdf.text(
-      `${local.toUpperCase()}, ${new Date().toLocaleDateString("pt-BR")}`,
-      20,
-      110
-    );
-    pdf.text(`${nomeEmitente}`, 20, 130);
-    pdf.text(`RG/IE n° ${rgEmitente}`, 20, 140);
-    pdf.text(`CPF/CNPJ n° ${cpfEmitente}`, 20, 150);
-  
-    pdf.save("recibo.pdf");
-  });
-  
+document.getElementById("reciboForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  // Coletar valores do formulário
+  const valor = document.getElementById("valor").value;
+  const valorExtenso = document.getElementById("valorExtenso").value;
+  const referente = document.getElementById("referente").value;
+  const nomePagador = document.getElementById("nomePagador").value;
+  const cpfCnpjPagador = document.getElementById("cpfCnpjPagador").value;
+  const chequeNumero = document.getElementById("chequeNumero").value;
+  const banco = document.getElementById("banco").value;
+  const agencia = document.getElementById("agencia").value;
+  const localEmissao = document.getElementById("localEmissao").value;
+  const nomeEmitente = document.getElementById("nomeEmitente").value;
+  const cpfCnpjEmitente = document.getElementById("cpfCnpjEmitente").value;
+  const rgEmitente = document.getElementById("rgEmitente").value;
+  const dataAtual = new Date().toLocaleDateString("pt-BR");
+
+  // Criar o PDF
+  const doc = new jsPDF();
+
+  doc.setFont("Times", "Bold");
+  doc.setFontSize(16);
+  doc.text("R E C I B O", 105, 20, null, null, "center");
+
+  doc.setFont("Times", "Normal");
+  doc.setFontSize(14);
+  doc.text(`Recibo R$ ${valor}`, 160, 30, null, null, "right");
+
+  doc.setFontSize(12);
+  doc.text(
+      `Recebi(emos) de ${nomePagador.toUpperCase()} - CPF/CNPJ nº ${cpfCnpjPagador},\na importância supra de: ***(${valorExtenso})*** - referente a: ${referente}.`,
+      10,
+      50
+  );
+
+  doc.text(
+      "E, para maior clareza firmo o presente recibo para que produza os seus efeitos,\ndando plena, rasa e irrevogável quitação, pelo valor recebido.",
+      10,
+      70
+  );
+
+  if (chequeNumero) {
+      doc.text(
+          `Pagamento efetuado através do cheque nº: ${chequeNumero} do Banco: ${banco} Agência: ${agencia}.`,
+          10,
+          90
+      );
+  } else {
+      doc.text("Pagamento efetuado em dinheiro.", 10, 90);
+  }
+
+  doc.text(
+      `${localEmissao.toUpperCase()}, ${dataAtual}`,
+      160,
+      110,
+      null,
+      null,
+      "right"
+  );
+
+  doc.text(nomeEmitente.toUpperCase(), 105, 140, null, null, "center");
+  doc.text(`RG/IE nº ${rgEmitente}`, 105, 150, null, null, "center");
+  doc.text(`CPF/CNPJ nº ${cpfCnpjEmitente}`, 105, 160, null, null, "center");
+
+  // Botão para salvar o PDF
+  doc.save("recibo.pdf");
+});
