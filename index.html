@@ -1,43 +1,57 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gerador de Recibos</title>
-  <link rel="stylesheet" href="styles/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Recibos</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Gerador de Recibos</h1>
-    <form id="recibo-form">
-      <label for="valor">Valor R$:</label>
-      <input type="text" id="valor" placeholder="Digite o valor">
+    <div class="container">
+        <h1>R E C I B O</h1>
+        <p class="description">Este serviço é uma cortesia do site. Os dados informados serão utilizados somente para gerar o recibo, sendo descartados automaticamente.</p>
 
-      <label for="valor-extenso">Valor (por extenso):</label>
-      <input type="text" id="valor-extenso" placeholder="Digite o valor por extenso">
+        <form id="recibo-form">
+            <label for="valor">Valor R$:</label>
+            <input type="text" id="valor" name="valor" required>
 
-      <label for="referente">Referente:</label>
-      <input type="text" id="referente" placeholder="Descreva o motivo">
+            <label for="valor-extenso">Valor (por extenso):</label>
+            <input type="text" id="valor-extenso" name="valor-extenso" required>
 
-      <label for="pagador">Nome do Pagador:</label>
-      <input type="text" id="pagador" placeholder="Nome do pagador">
+            <label for="referente">Referente:</label>
+            <input type="text" id="referente" name="referente" required>
 
-      <label for="cpf-pagador">CPF/CNPJ do Pagador:</label>
-      <input type="text" id="cpf-pagador" placeholder="CPF/CNPJ do pagador">
+            <label for="nome-pagador">Nome do Pagador:</label>
+            <input type="text" id="nome-pagador" name="nome-pagador" required>
 
-      <label for="local">Local (Cidade/Estado):</label>
-      <input type="text" id="local" placeholder="Cidade/Estado">
+            <label for="cpf-pagador">CPF/CNPJ do Pagador:</label>
+            <input type="text" id="cpf-pagador" name="cpf-pagador" required>
 
-      <label for="emissor">Nome do Emitente:</label>
-      <input type="text" id="emissor" placeholder="Nome do emitente">
+            <label for="cheque-num">Cheque Nº:</label>
+            <input type="text" id="cheque-num" name="cheque-num">
 
-      <label for="cpf-emissor">CPF/CNPJ do Emitente:</label>
-      <input type="text" id="cpf-emissor" placeholder="CPF/CNPJ do emitente">
+            <label for="banco">Banco:</label>
+            <input type="text" id="banco" name="banco">
 
-      <button type="button" id="gerar">Gerar Recibo</button>
-      <button type="reset">Limpar</button>
-    </form>
-  </div>
-  <script src="scripts/script.js"></script>
+            <label for="local">Local (Cidade/Estado):</label>
+            <input type="text" id="local" name="local" required>
+
+            <label for="nome-emitente">Nome do Emitente:</label>
+            <input type="text" id="nome-emitente" name="nome-emitente" required>
+
+            <label for="cpf-emitente">CPF/CNPJ do Emitente:</label>
+            <input type="text" id="cpf-emitente" name="cpf-emitente" required>
+
+            <label for="rg-emitente">RG do Emitente:</label>
+            <input type="text" id="rg-emitente" name="rg-emitente">
+
+            <div class="buttons">
+                <button type="button" id="generate">Gerar o Recibo</button>
+                <button type="reset">Limpar</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
