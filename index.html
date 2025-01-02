@@ -1,57 +1,43 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerar Recibo</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Recibos</title>
+  <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
-    <h1>Gerar Recibo</h1>
+  <div class="container">
+    <h1>Gerador de Recibos</h1>
     <form id="recibo-form">
-        <label for="email">E-mail para envio:</label>
-        <input type="email" id="email" name="email" required>
-        <br><br>
-        <button type="button" onclick="gerarRecibo()">Gerar Recibo</button>
+      <label for="valor">Valor R$:</label>
+      <input type="text" id="valor" placeholder="Digite o valor">
+
+      <label for="valor-extenso">Valor (por extenso):</label>
+      <input type="text" id="valor-extenso" placeholder="Digite o valor por extenso">
+
+      <label for="referente">Referente:</label>
+      <input type="text" id="referente" placeholder="Descreva o motivo">
+
+      <label for="pagador">Nome do Pagador:</label>
+      <input type="text" id="pagador" placeholder="Nome do pagador">
+
+      <label for="cpf-pagador">CPF/CNPJ do Pagador:</label>
+      <input type="text" id="cpf-pagador" placeholder="CPF/CNPJ do pagador">
+
+      <label for="local">Local (Cidade/Estado):</label>
+      <input type="text" id="local" placeholder="Cidade/Estado">
+
+      <label for="emissor">Nome do Emitente:</label>
+      <input type="text" id="emissor" placeholder="Nome do emitente">
+
+      <label for="cpf-emissor">CPF/CNPJ do Emitente:</label>
+      <input type="text" id="cpf-emissor" placeholder="CPF/CNPJ do emitente">
+
+      <button type="button" id="gerar">Gerar Recibo</button>
+      <button type="reset">Limpar</button>
     </form>
-
-    <script>
-        // Inicializando EmailJS
-        emailjs.init("qI4LCXqDkmxT1FBEs");
-
-        function gerarRecibo() {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-
-            // Gerar o conteúdo do recibo
-            doc.text("Recibo Gerado", 10, 10);
-            doc.text("Data: " + new Date().toLocaleDateString(), 10, 20);
-            doc.text("Valor: R$ 100,00", 10, 30);
-            // Adicione outros dados que você desejar
-
-            // Salvar ou abrir o documento
-            const pdfUrl = doc.output('bloburl');
-            window.open(pdfUrl, '_blank');
-
-            // Enviar por e-mail
-            const email = document.getElementById('email').value;
-            const templateParams = {
-                to_email: email,
-                subject: "Recibo Gerado",
-                message: "Segue o recibo gerado.",
-                attachment: doc.output('datauristring')
-            };
-
-            emailjs.send('service_km1w0fm', 'template_da6wae6', templateParams)
-                .then(response => {
-                    console.log('Email enviado', response);
-                    alert("Recibo enviado para o seu e-mail!");
-                }, error => {
-                    console.error('Erro ao enviar e-mail', error);
-                    alert("Erro ao enviar o e-mail!");
-                });
-        }
-    </script>
+  </div>
+  <script src="scripts/script.js"></script>
 </body>
 </html>
