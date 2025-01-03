@@ -1,57 +1,274 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
+<html lang="pt-BR"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerador de Recibos</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Contrato de Locação</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>R E C I B O</h1>
-        <p class="description">Este serviço é uma cortesia do site. Os dados informados serão utilizados somente para gerar o recibo, sendo descartados automaticamente.</p>
 
-        <form id="recibo-form">
-            <label for="valor">Valor R$:</label>
-            <input type="text" id="valor" name="valor" required>
+<header>
+    <h1>Contrato de Locação</h1>
+</header>
 
-            <label for="valor-extenso">Valor (por extenso):</label>
-            <input type="text" id="valor-extenso" name="valor-extenso" required>
+<form id="contractForm">
+    <div class="section section-gray">
+        <label for="tipoLocacao">Tipo da Locação:</label>
+        <select id="tipoLocacao" name="tipoLocacao" required="">
+            <option value="">Selecione</option>
+            <option value="Comercial">Comercial</option>
+            <option value="Residencial">Residencial</option>
+        </select>
 
-            <label for="referente">Referente:</label>
-            <input type="text" id="referente" name="referente" required>
+        <label for="nomeLocador">Nome do Locador:</label>
+        <input type="text" id="nomeLocador" name="nomeLocador" required="">
 
-            <label for="nome-pagador">Nome do Pagador:</label>
-            <input type="text" id="nome-pagador" name="nome-pagador" required>
+        <label for="qualificacaoLocador">Qualificação do Locador:</label>
+        <input type="text" id="qualificacaoLocador" name="qualificacaoLocador" required="">
 
-            <label for="cpf-pagador">CPF/CNPJ do Pagador:</label>
-            <input type="text" id="cpf-pagador" name="cpf-pagador" required>
+        <label for="enderecoLocador">Endereço Completo do Locador:</label>
+        <textarea id="enderecoLocador" name="enderecoLocador" required=""></textarea>
 
-            <label for="cheque-num">Cheque Nº:</label>
-            <input type="text" id="cheque-num" name="cheque-num">
+        <label for="rgLocador">R.G. do Locador:</label>
+        <input type="text" id="rgLocador" name="rgLocador" required="">
 
-            <label for="banco">Banco:</label>
-            <input type="text" id="banco" name="banco">
-
-            <label for="local">Local (Cidade/Estado):</label>
-            <input type="text" id="local" name="local" required>
-
-            <label for="nome-emitente">Nome do Emitente:</label>
-            <input type="text" id="nome-emitente" name="nome-emitente" required>
-
-            <label for="cpf-emitente">CPF/CNPJ do Emitente:</label>
-            <input type="text" id="cpf-emitente" name="cpf-emitente" required>
-
-            <label for="rg-emitente">RG do Emitente:</label>
-            <input type="text" id="rg-emitente" name="rg-emitente">
-
-            <div class="buttons">
-                <button type="button" id="generate">Gerar o Recibo</button>
-                <button type="reset">Limpar</button>
-            </div>
-        </form>
+        <label for="cpfLocador">C.P.F. do Locador:</label>
+        <input type="text" id="cpfLocador" name="cpfLocador" required="" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" title="Digite um CPF válido.">
     </div>
 
-    <script src="script.js"></script>
-</body>
-</html>
+    <div class="section section-blue">
+        <label for="nomeInquilino">Nome do Inquilino:</label>
+        <input type="text" id="nomeInquilino" name="nomeInquilino" required="">
+
+        <label for="qualificacaoInquilino">Qualificação do Inquilino:</label>
+        <input type="text" id="qualificacaoInquilino" name="qualificacaoInquilino" required="">
+
+        <label for="rgInquilino">R.G. do Inquilino:</label>
+        <input type="text" id="rgInquilino" name="rgInquilino" required="">
+
+        <label for="cpfInquilino">C.P.F. do Inquilino:</label>
+        <input type="text" id="cpfInquilino" name="cpfInquilino" required="" pattern="\d{11}" title="Digite um CPF válido.">
+
+        <label for="enderecoImovel">Endereço Completo do Imóvel Locado:</label>
+        <textarea id="enderecoImovel" name="enderecoImovel" required=""></textarea>
+    </div>
+
+    <div class="section section-orange">
+        <label for="prazoContrato">Prazo do Contrato:</label>
+        <input type="text" id="prazoContrato" name="prazoContrato" required="">
+
+        <label for="vigenciaContrato">Vigência do Contrato:</label>
+        <input type="date" id="dataInicial" name="dataInicial" required="">
+        <input type="date" id="dataFinal" name="dataFinal" required="">
+
+        <label for="valorAluguel">Valor do Aluguel (R$):</label>
+        <input type="text" id="valorAluguel" name="valorAluguel" required="" pattern="\d+\.\d{2}" title="Digite um valor válido no formato 1000.00">
+
+        <label for="diaPagamento">Dia para Pagamento:</label>
+        <input type="text" id="diaPagamento" name="diaPagamento" required="">
+
+        <label for="formaPagamento">Forma de Pagamento:</label>
+        <textarea id="formaPagamento" name="formaPagamento" required=""></textarea>
+
+        <label for="multaContratual">Multa Contratual (R$):</label>
+        <input type="text" id="multaContratual" name="multaContratual" required="">
+
+        <label for="forum">Fórum:</label>
+        <input type="text" id="forum" name="forum" required="">
+    </div>
+
+    <div class="section section-purple">
+        <label for="nomeFiador">Nome do Fiador:</label>
+        <input type="text" id="nomeFiador" name="nomeFiador" required="">
+
+        <label for="qualificacaoFiador">Qualificação do Fiador:</label>
+        <input type="text" id="qualificacaoFiador" name="qualificacaoFiador" required="">
+
+        <label for="enderecoFiador">Endereço Completo do Fiador:</label>
+        <textarea id="enderecoFiador" name="enderecoFiador" required=""></textarea>
+
+        <label for="rgFiador">R.G. do Fiador:</label>
+        <input type="text" id="rgFiador" name="rgFiador" required="">
+
+        <label for="cpfFiador">C.P.F. do Fiador:</label>
+        <input type="text" id="cpfFiador" name="cpfFiador" required="" pattern="\d{11}" title="Digite um CPF válido.">
+
+        <label for="foneFiador">Fone do Fiador:</label>
+        <input type="text" id="foneFiador" name="foneFiador" required="" pattern="\d{10,11}" title="Digite um número de telefone válido.">
+    </div>
+
+    <div class="section section-pink">
+        <label for="nomeEsposaFiador">Nome da Esposa do Fiador:</label>
+        <input type="text" id="nomeEsposaFiador" name="nomeEsposaFiador">
+
+        <label for="rgEsposaFiador">R.G. da Esposa do Fiador:</label>
+        <input type="text" id="rgEsposaFiador" name="rgEsposaFiador">
+
+        <label for="cpfEsposaFiador">C.P.F. da Esposa do Fiador:</label>
+        <input type="text" id="cpfEsposaFiador" name="cpfEsposaFiador" pattern="\d{11}" title="Digite um CPF válido.">
+    </div>
+
+    <div class="section section">
+        <label for="propriedadeFiador">Propriedade do Fiador:</label>
+        <textarea id="propriedadeFiador" name="propriedadeFiador"></textarea>
+    </div>
+
+    <div class="section section-yellow">
+        <label for="clausula22">Cláusula 22 - Extraordinária:</label>
+        <textarea id="clausula22" name="clausula22"></textarea>
+
+        <label for="clausula23">Cláusula 23 - Extraordinária:</label>
+        <textarea id="clausula23" name="clausula23"></textarea>
+
+        <label for="clausula24">Cláusula 24 - Extraordinária:</label>
+        <textarea id="clausula24" name="clausula24"></textarea>
+
+        <label for="clausula25">Cláusula 25 - Extraordinária:</label>
+        <textarea id="clausula25" name="clausula25"></textarea>
+    </div>
+
+    <div class="section section-red">
+        <label for="localAssinatura">Local e Data da Assinatura do Contrato:</label>
+        <input type="text" id="localAssinatura" name="localAssinatura" required>
+
+        <label for="dataAssinatura">Data:</label>
+        <input type="date" id="dataAssinatura" name="dataAssinatura">
+    </div>
+
+    <div class="attention">
+        ATENÇÃO! Os dados enviados preencherão o Contrato de Locação padrão, que poderá ser impresso ou copiado para o Word para alterações, e serão descartados, não ficando armazenados.
+    </div>
+
+    <input type="button" onclick="generatePDF()" value="Gerar PDF">
+    <button type="reset">Limpar</button>
+    <button type="button" onclick="window.history.back()">Voltar</button>
+</form>
+
+<footer>
+    <p>Desenvolvido por [Seu Nome]</p>
+</footer>
+
+<script>
+    function generatePDF() {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+
+        const tipoLocacao = document.getElementById('tipoLocacao').value;
+        const nomeLocador = document.getElementById('nomeLocador').value;
+        const qualificacaoLocador = document.getElementById('qualificacaoLocador').value;
+        const enderecoLocador = document.getElementById('enderecoLocador').value;
+        const rgLocador = document.getElementById('rgLocador').value;
+        const cpfLocador = document.getElementById('cpfLocador').value;
+
+        const nomeInquilino = document.getElementById('nomeInquilino').value;
+        const qualificacaoInquilino = document.getElementById('qualificacaoInquilino').value;
+        const rgInquilino = document.getElementById('rgInquilino').value;
+        const cpfInquilino = document.getElementById('cpfInquilino').value;
+        const enderecoImovel = document.getElementById('enderecoImovel').value;
+
+        const prazoContrato = document.getElementById('prazoContrato').value;
+        const dataInicial = document.getElementById('dataInicial').value;
+        const dataFinal = document.getElementById('dataFinal').value;
+        const valorAluguel = document.getElementById('valorAluguel').value;
+        const diaPagamento = document.getElementById('diaPagamento').value;
+        const formaPagamento = document.getElementById('formaPagamento').value;
+        const multaContratual = document.getElementById('multaContratual').value;
+        const forum = document.getElementById('forum').value;
+
+        const nomeFiador = document.getElementById('nomeFiador').value;
+        const qualificacaoFiador = document.getElementById('qualificacaoFiador').value;
+        const enderecoFiador = document.getElementById('enderecoFiador').value;
+        const rgFiador = document.getElementById('rgFiador').value;
+        const cpfFiador = document.getElementById('cpfFiador').value;
+        const foneFiador = document.getElementById('foneFiador').value;
+
+        const nomeEsposaFiador = document.getElementById('nomeEsposaFiador').value;
+        const rgEsposaFiador = document.getElementById('rgEsposaFiador').value;
+        const cpfEsposaFiador = document.getElementById('cpfEsposaFiador').value;
+
+        const propriedadeFiador = document.getElementById('propriedadeFiador').value;
+
+        const clausula22 = document.getElementById('clausula22').value || "-";
+        const clausula23 = document.getElementById('clausula23').value || "-";
+        const clausula24 = document.getElementById('clausula24').value || "-";
+        const clausula25 = document.getElementById('clausula25').value || "-";
+
+        const localAssinatura = document.getElementById('localAssinatura').value;
+        const dataAssinatura = document.getElementById('dataAssinatura').value;
+        const doctText = [];
+
+        doc.setFont("Helvetica", "bold");
+        doc.setFontSize(14);
+        doctText.push("CONTRATO DE LOCAÇÃO");
+
+        doc.setFont("Helvetica", "normal");
+        doc.setFontSize(10);
+        doctText.push(`Os signatários deste instrumento, de um lado, ${nomeLocador}, residente e domiciliado à ${enderecoLocador}, portador do RG Nº ${rgLocador} e CPF Nº ${cpfLocador},`);
+        doctText.push(`adiante denominado simplesmente LOCADOR e de outro, ${nomeInquilino}, portador do RG Nº ${rgInquilino} e CPF Nº ${cpfInquilino},`);
+        doctText.push(`adiante denominado simplesmente LOCATÁRIO, têm entre si justo e contratado o seguinte, que mutuamente aceitam e outorgam, a saber:`);
+
+        doctText.push(`O LOCADOR, sendo proprietário do imóvel sito à ${enderecoImovel}, adiante designado como "IMÓVEL LOCADO", loca-o ao LOCATÁRIO`);
+        doctText.push(`mediante as cláusulas e condições adiante estipuladas, ou sejam:`);
+
+        doctText.push(`1ª) O prazo de locação é de ${prazoContrato} meses, iniciando em ${dataInicial} e terminando em ${dataFinal}, data em que o LOCATÁRIO`);
+        doctText.push(`se obriga a restituir o IMÓVEL LOCADO completamente desocupado, no estado em que o recebeu, independentemente de notificação ou`);
+        doctText.push(`2ª) O aluguel mensal é de R$ ${valorAluguel}, que o LOCATÁRIO se compromete a pagar pontualmente, até o dia ${diaPagamento} de cada mês, da seguinte forma: ${formaPagamento}.`);
+
+        doctText.push(`3ª) O LOCATÁRIO, salvo as obras que importem na segurança do IMÓVEL LOCADO, obriga-se por todas as outras, devendo trazer o IMÓVEL LOCADO em boas condições de higiene e limpeza,`);
+        doctText.push(`com os aparelhos sanitários e de iluminação, fogão, papéis, pinturas, telhados, vidraças, mármores, fechos, torneiras, pias, banheiros, ralos e demais acessórios em perfeito estado de conservação e funcionamento.`);
+
+        doctText.push(`4ª) Obriga-se mais o LOCATÁRIO a satisfazer a todas as exigências dos Poderes Públicos, a que der causa, e a não transferir este contrato, nem fazer modificações ou transformações no IMÓVEL LOCADO sem autorização escrita do LOCADOR.`);
+
+        doctText.push(`5ª) O LOCATÁRIO desde já autoriza a vistoria do imóvel locado, quando o LOCADOR achar necessário.`);
+
+        doctText.push(`6ª) O LOCATÁRIO também não poderá sublocar, ceder, nem emprestar o IMÓVEL LOCADO no todo ou em parte, sem o consentimento por escrito do LOCADOR.`);
+
+        doctText.push(`7ª) No caso de desapropriação do IMÓVEL LOCADO, ficará o LOCADOR desobrigado de todas as cláusulas deste contrato, ressalvada ao LOCATÁRIO, tão somente, a faculdade de haver do poder desapropriante a indenização a que, porventura, tiver direito.`);
+
+        doctText.push(`8ª) Para todas as questões resultantes deste contrato, será competente o foro de ${forum}.`);
+
+        doctText.push(`Clasula primeira) ${clausula22}`);
+
+        doctText.push(`Clasula segunda) ${clausula23}`);
+
+        doctText.push(`Clasula terceira) ${clausula24}`);
+
+        doctText.push(`Clasula quarta) ${clausula25}`);
+
+	
+        doctText.push(`Local e Data: ${localAssinatura}, ${dataAssinatura}`);
+        doctText.push(`Locador: ${nomeLocador}`);
+        doctText.push(`Locatário: ${nomeInquilino}`);
+        doctText.push(`Fiador: ${nomeFiador}`);
+        var size = 20;
+        const fontSize = 12; // Tamanho da fonte em pontos
+        const fatorConversao = 0.3528; // 1 ponto ≈ 0.3528 mm
+        const alturaLinha = fontSize * fatorConversao;
+        var alturaTexto = 0; 
+        var linhas;
+        
+        doctText.forEach((item, index)=>{
+            linhas = doc.splitTextToSize(item, 170);
+            alturaTexto = linhas.length * alturaLinha;
+
+            if(size + alturaTexto >= 297){
+                doc.addPage();
+                size = 20;
+            }
+
+            doc.text(item, 20, size, { maxWidth: 170 });
+            size += alturaTexto + fatorConversao * 5;
+        })
+        doc.save("Contrato_de_Locação.pdf");
+        
+        
+         // Enviar o PDF por e-mail
+         
+ 
+    }
+</script>
+
+
+
+
+</body></html>

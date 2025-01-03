@@ -1,61 +1,102 @@
-/* style.css */
+
 body {
   font-family: Arial, sans-serif;
-  background-color: #000;
-  color: #00ff00;
   margin: 0;
   padding: 0;
+  background: linear-gradient(135deg, #ffffff, #eeeeee);
+  color: #333;
 }
-
-.container {
-  max-width: 800px;
-  margin: 20px auto;
-  padding: 20px;
-  border: 2px solid #00f;
+header {
   background-color: #333;
-}
-
-h1 {
+  color: white;
   text-align: center;
-  color: #00ff00;
+  padding: 20px;
 }
-
-.description {
-  text-align: center;
-  margin-bottom: 20px;
+header h1 {
+  margin: 0;
 }
-
 form {
-  display: grid;
-  gap: 10px;
+  max-width: 800px;
+  margin: 40px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
-
 label {
+  display: block;
+  margin: 10px 0 5px;
   font-weight: bold;
+  color: black;
 }
-
-input {
-  padding: 5px;
-  border: 1px solid #00f;
+input, select, textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
   border-radius: 5px;
-  background-color: #222;
-  color: #fff;
 }
-
-.buttons {
-  display: flex;
-  justify-content: space-between;
+.section {
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
 }
-
+.section-gray {
+  background-color: #d3d3d3;
+}
+.section-blue {
+  background-color: #add8e6;
+}
+.section-orange {
+  background-color: #ffa500;
+}
+.section-purple {
+  background-color: #e6e6fa;
+}
+.section-pink {
+  background-color: #ffe4e1;
+}
+.section-navy {
+  background-color: #001f3f;
+  color: white;
+}
+.section-yellow {
+  background-color: #ffffe0;
+}
+.section-red {
+  background-color: #f08080;
+}
 button {
-  padding: 10px 20px;
+  background-color: #6200ea;
+  color: white;
+  padding: 15px;
+  font-size: 16px;
   border: none;
-  background-color: #00f;
-  color: #fff;
+  border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s;
+  margin-right: 10px;
+}
+button:hover {
+  background-color: #3700b3;
+}
+footer {
+  text-align: center;
+  margin-top: 20px;
+  padding: 10px;
+  background: #333;
+  color: white;
+}
+.attention {
+  text-align: center;
+  color: red;
+  background-color: yellow;
+  padding: 10px;
+  margin: 20px 0;
+  font-weight: bold;
   border-radius: 5px;
 }
-
-button:hover {
-  background-color: #0057e7;
+.error {
+  color: red;
+  font-size: 12px;
 }
