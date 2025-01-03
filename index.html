@@ -197,45 +197,41 @@
         const dataAssinatura = document.getElementById('dataAssinatura').value;
         const doctText = [];
 
-        doc.setFont("Helvetica", "bold");
-        doc.setFontSize(14);
         doctText.push("CONTRATO DE LOCAÇÃO");
-
-        doc.setFont("Helvetica", "normal");
-        doc.setFontSize(10);
+        
         doctText.push(`Os signatários deste instrumento, de um lado, ${nomeLocador}, residente e domiciliado à ${enderecoLocador}, portador do RG Nº ${rgLocador} e CPF Nº ${cpfLocador},`);
         doctText.push(`adiante denominado simplesmente LOCADOR e de outro, ${nomeInquilino}, portador do RG Nº ${rgInquilino} e CPF Nº ${cpfInquilino},`);
         doctText.push(`adiante denominado simplesmente LOCATÁRIO, têm entre si justo e contratado o seguinte, que mutuamente aceitam e outorgam, a saber:`);
-
+        
         doctText.push(`O LOCADOR, sendo proprietário do imóvel sito à ${enderecoImovel}, adiante designado como "IMÓVEL LOCADO", loca-o ao LOCATÁRIO`);
         doctText.push(`mediante as cláusulas e condições adiante estipuladas, ou sejam:`);
-
+        
         doctText.push(`1ª) O prazo de locação é de ${prazoContrato} meses, iniciando em ${dataInicial} e terminando em ${dataFinal}, data em que o LOCATÁRIO`);
         doctText.push(`se obriga a restituir o IMÓVEL LOCADO completamente desocupado, no estado em que o recebeu, independentemente de notificação ou`);
         doctText.push(`2ª) O aluguel mensal é de R$ ${valorAluguel}, que o LOCATÁRIO se compromete a pagar pontualmente, até o dia ${diaPagamento} de cada mês, da seguinte forma: ${formaPagamento}.`);
-
+        
         doctText.push(`3ª) O LOCATÁRIO, salvo as obras que importem na segurança do IMÓVEL LOCADO, obriga-se por todas as outras, devendo trazer o IMÓVEL LOCADO em boas condições de higiene e limpeza,`);
         doctText.push(`com os aparelhos sanitários e de iluminação, fogão, papéis, pinturas, telhados, vidraças, mármores, fechos, torneiras, pias, banheiros, ralos e demais acessórios em perfeito estado de conservação e funcionamento.`);
-
+        
         doctText.push(`4ª) Obriga-se mais o LOCATÁRIO a satisfazer a todas as exigências dos Poderes Públicos, a que der causa, e a não transferir este contrato, nem fazer modificações ou transformações no IMÓVEL LOCADO sem autorização escrita do LOCADOR.`);
 
         doctText.push(`5ª) O LOCATÁRIO desde já autoriza a vistoria do imóvel locado, quando o LOCADOR achar necessário.`);
-
+        
         doctText.push(`6ª) O LOCATÁRIO também não poderá sublocar, ceder, nem emprestar o IMÓVEL LOCADO no todo ou em parte, sem o consentimento por escrito do LOCADOR.`);
-
+        
         doctText.push(`7ª) No caso de desapropriação do IMÓVEL LOCADO, ficará o LOCADOR desobrigado de todas as cláusulas deste contrato, ressalvada ao LOCATÁRIO, tão somente, a faculdade de haver do poder desapropriante a indenização a que, porventura, tiver direito.`);
-
+        
         doctText.push(`8ª) Para todas as questões resultantes deste contrato, será competente o foro de ${forum}.`);
-
+        
         doctText.push(`Clasula primeira) ${clausula22}`);
-
+        
         doctText.push(`Clasula segunda) ${clausula23}`);
-
+        
         doctText.push(`Clasula terceira) ${clausula24}`);
-
+        
         doctText.push(`Clasula quarta) ${clausula25}`);
-
-	
+        
+        
         doctText.push(`Local e Data: ${localAssinatura}, ${dataAssinatura}`);
         doctText.push(`Locador: ${nomeLocador}`);
         doctText.push(`Locatário: ${nomeInquilino}`);
@@ -246,25 +242,27 @@
         const alturaLinha = fontSize * fatorConversao;
         var alturaTexto = 0; 
         var linhas;
+        doc.setFont("Helvetica", "normal");
+        doc.setFontSize(fontSize);
         
         doctText.forEach((item, index)=>{
             linhas = doc.splitTextToSize(item, 170);
             alturaTexto = linhas.length * alturaLinha;
-
+            
             if(size + alturaTexto >= 297){
                 doc.addPage();
                 size = 20;
             }
-
+            
             doc.text(item, 20, size, { maxWidth: 170 });
-            size += alturaTexto + fatorConversao * 5;
+            size += alturaTexto + fatorConversao * fontSize*2/3;
         })
         doc.save("Contrato_de_Locação.pdf");
         
         
-         // Enviar o PDF por e-mail
-         
- 
+        // Enviar o PDF por e-mail
+        
+        
     }
 </script>
 
